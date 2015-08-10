@@ -1,0 +1,12 @@
+{
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "index": "not_analyzed"
+    },
+    "dnaString": {
+      "type": "string",
+      "index": "not_analyzed"
+    }
+  }
+}

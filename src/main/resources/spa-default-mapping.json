@@ -1,0 +1,16 @@
+{
+  "dynamic_templates": [
+    {
+      "mystrings": {
+        "match": "*",
+        "match_mapping_type": "string",
+        "mapping": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  ],
+  "properties": {
+  }
+}

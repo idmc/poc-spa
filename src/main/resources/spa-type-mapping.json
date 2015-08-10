@@ -1,0 +1,20 @@
+{
+  "properties": {
+    "tNumber": {
+      "type": "string",
+      "index": "not_analyzed"
+    },
+    "repeats": {
+      "type": "string",
+      "index": "not_analyzed"
+    },
+    "repeatsDna": {
+      "type": "string",
+      "index": "not_analyzed"
+    },
+    "repeatsString": {
+      "type": "string",
+      "index": "not_analyzed"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="idmc">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IDMC-SPA</title>
+    <link rel="stylesheet" href="style/app.min.css">
+    <link rel="stylesheet" href="style/angular-awesome-slider.min.css">
+</head>
+<body>
+<navbar heading="IDMC-SPA">
+    <navbaritem link="dashboard" title="Dashboard"></navbaritem>
+    <navbaritem link="dashboard2" title="Dashboard 2"></navbaritem>
+</navbar>
+
+<div class="container-fluid" ng-view>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <footer>
+                <p class="text-center">IDMC</p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<script src="js/idmc-spa.js"></script>
+<script src="js/angular-awesome-slider.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<div class="row">
+    <div class="col-lg-8">
+        <div class="panel panel-warning">
+            <div class="panel-heading">&nbsp;
+                <span class="col-lg-3">
+                <button class="btn btn-xs btn-default" ng-click="restartPlay()"><span class="fa fa-refresh"></span></button>
+                <button class="btn btn-xs btn-default" ng-click="previousPeriod()"><span class="fa fa-backward"></span></button>
+                <button class="btn btn-xs btn-default" ng-click="startPlay()"><span class="fa fa-play"></span></button>
+                <button class="btn btn-xs btn-default" ng-click="pausePlay()"><span class="fa fa-pause"></span></button>
+                <button class="btn btn-xs btn-default" ng-click="nextPeriod()"><span class="fa fa-forward"></span></button>
+                </span>
+                <span class="col-lg-5">
+                    <input ng-model="currentPeriod" type="text" id="mySlider1" slider options="sliderOptions"/>
+                </span>
+                <span class="col-lg-1">
+                    <button class="btn btn-xs btn-default" ng-click="refreshData()"><i class="fa fa-refresh"></i> reload data</button>
+                </span>
+            </div>
+            <div class="panel-body">
+                <div id="customMap" style="height: 600px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-warning">
+            <div class="panel-heading">Show the countries</div>
+            <div class="panel-body" style="height: 600px;">
+                <div>Interval : {{usedFilter.interval}}</div>
+                <div>Start date: {{usedFilter.startDate | date:'dd-MM-yyyy'}}</div>
+                <div>End date: {{usedFilter.endDate | date:'dd-MM-yyyy'}}</div>
+                <div>Counts type: {{usedFilter.counts}}</div>
+                <div>Types: {{usedFilter.chosenTypes.join(' - ')}}</div>
+                <hr/>
+                <div>Episode start: {{currentPeriodKey | date:'dd-MM-yyyy'}}</div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Counts</th>
+                        <th>Cumulative</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="(key,value) in countries">
+                        <td>{{key}}</td>
+                        <td>{{value.count}}</td>
+                        <td>{{value.cumulative}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-default"><i class="fa fa-file-excel-o"></i> Export to excel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                Period
+            </div>
+            <div class="panel-body">
+                <p class="input-group">
+                    <span class="input-group-addon">start date</span>
+                    <input type="text" class="form-control"
+                           datepicker-popup="dd-MM-yyyy"
+                           ng-model="filter.startDate"
+                           is-open="openedStartDate"
+                           datepicker-options="dateOptions"
+                           ng-required="false"
+                           close-text="Close"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openStartDate($event)"><i
+                                    class="fa fa-calendar"></i></button>
+                        </span>
+                </p>
+
+                <p class="input-group">
+                    <span class="input-group-addon">end date</span>
+                    <input type="text" class="form-control"
+                           datepicker-popup="dd-MM-yyyy"
+                           ng-model="filter.endDate"
+                           is-open="openedEndDate"
+                           datepicker-options="dateOptions"
+                           ng-required="false"
+                           close-text="Close"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i
+                                    class="fa fa-calendar"></i></button>
+                        </span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                Spa type
+            </div>
+            <div class="panel-body">
+                <p class="input-group">
+                    <input type="text"
+                           ng-model="selectType"
+                           typeahead="type.spaType as (type.spaType+' ('+type.count+')') for type in types | filter:{spaType:$viewValue} | limitTo:20"
+                           typeahead-on-select="addSpaTypeToFilter()"
+                           class="form-control">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="addSpaTypeToFilter()"><i class="fa fa-plus"></i></button>
+                    </span>
+                </p>
+                <span ng-repeat="type in filter.chosenTypes"><span class="label label-default">{{type}}<button
+                        class="btn btn-sm btn-link btn-default"
+                        ng-click="removeSpaTypeFromFilter($index)"
+                        title="Remove spa type"><i class="fa fa-remove icon-white"></i></button></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                Presentation
+            </div>
+            <div class="panel-body">
+                <p class="input-group">
+                <label class="radio-inline">
+                    <input type="radio" ng-model="filter.counts" value="period">Counts per period
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="filter.counts" value="cumulative">Cumulative counts
+                </label>
+                </p>
+                <p class="input-group">
+                    <label>Chose interval</label>
+                    <select ng-model="filter.interval">
+                        <option value="year">Year</option>
+                        <option value="quarter">Quarter</option>
+                        <option value="month">Month</option>
+                        <option value="week">Week</option>
+                        <option value="day">Day</option>
+                    </select>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+{
+  "dynamic_templates": [
+    {
+      "mystrings": {
+        "match": "*",
+        "match_mapping_type": "string",
+        "mapping": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  ],
+  "properties": {
+    "location": {
+      "type": "geo_point"
+    },
+    "submissionDate": {
+      "type": "date",
+      "format": "basic_date"
+    },
+    "isolateDate": {
+      "type": "date",
+      "format": "basic_date"
+    },
+    "repeatsString": {
+      "type": "string",
+      "index_analyzer": "repeat_analyzer",
+      "search_analyzer": "search_repeat_analyzer"
+    }
+  }
+}
